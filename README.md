@@ -8,11 +8,24 @@ Lets your OpenClaw gateway send and receive messages over Meshtastic devices —
   <img src="media/hardware.jpg" width="400" alt="Meshtastic LoRa hardware with Seeed WM1302 module" />
 </p>
 
+
 ## Demo
 
 https://github.com/user-attachments/assets/demo.mp4
 
 > The video above shows OpenClaw communicating over a Meshtastic LoRa mesh network. If it doesn't load, see [media/demo.mp4](media/demo.mp4).
+
+⚡ **Build this off-grid setup for $9.9:** [XIAO ESP32S3 & Wio-SX1262 Kit for Meshtastic & LoRa](https://www.seeedstudio.com/Wio-SX1262-with-XIAO-ESP32S3-p-5982.html)
+
+<p align="center">
+  <img src="media/XIAOclaw.png" width="800" alt="Meshtastic device Seeed XIAO module" />
+</p>
+
+**🎒Or get a ready-to-deploy node :**
+
+[Meshtastic Device - Wio Tracker L1 Pro](https://www.seeedstudio.com/Wio-Tracker-L1-Pro-p-6454.html)
+
+[Meshtastic Device - SenseCAP Card Tracker T1000-E](https://www.seeedstudio.com/SenseCAP-Card-Tracker-T1000-E-for-Meshtastic-p-5913.html)
 
 ## Features
 
@@ -32,7 +45,9 @@ https://github.com/user-attachments/assets/demo.mp4
 
 - [OpenClaw](https://github.com/openclaw/openclaw) installed and running
 - Node.js 22+
-- For serial transport: a Meshtastic device connected via USB
+- For serial transport: 
+  - a Meshtastic device connected via USB to your OpenClaw host ( Seeed Studio reComputer R1000 recommended) 
+  - Future update: Support for direct MiniPCIe Meshtastic cards is coming soon.
 - For HTTP transport: a Meshtastic device on the same network
 - For MQTT transport: access to an MQTT broker (public `mqtt.meshtastic.org` works out of the box)
 
@@ -63,6 +78,7 @@ The wizard walks you through transport selection, connection details, region, ac
 <p align="center">
   <img src="media/setup-screenshot.png" width="600" alt="OpenClaw setup wizard with Meshtastic channel configured" />
 </p>
+
 
 ### Manual configuration
 
@@ -112,24 +128,24 @@ channels:
 
 ### Configuration reference
 
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
-| `transport` | `serial` \| `http` \| `mqtt` | `serial` | Connection method |
-| `serialPort` | string | — | Serial device path |
-| `httpAddress` | string | `meshtastic.local` | Device IP or hostname |
-| `httpTls` | boolean | `false` | Use HTTPS for HTTP transport |
-| `mqtt.broker` | string | `mqtt.meshtastic.org` | MQTT broker hostname |
-| `mqtt.port` | number | `1883` | MQTT broker port |
-| `mqtt.username` | string | `meshdev` | MQTT username |
-| `mqtt.password` | string | `large4cats` | MQTT password |
-| `mqtt.topic` | string | `msh/US/2/json/#` | MQTT subscribe topic |
-| `mqtt.tls` | boolean | `false` | Use TLS for MQTT |
-| `region` | string | `UNSET` | LoRa region (serial/HTTP only) |
-| `nodeName` | string | — | Device display name and @mention trigger |
-| `dmPolicy` | `open` \| `pairing` \| `allowlist` | `pairing` | DM access policy |
-| `allowFrom` | string[] | — | Allowed node IDs (e.g. `["!aabbccdd"]`) |
-| `groupPolicy` | `open` \| `allowlist` \| `disabled` | `disabled` | Group channel policy |
-| `channels` | object | — | Per-channel config (requireMention, tools, allowFrom) |
+| Key             | Type                                | Default               | Description                                           |
+| --------------- | ----------------------------------- | --------------------- | ----------------------------------------------------- |
+| `transport`     | `serial` \| `http` \| `mqtt`        | `serial`              | Connection method                                     |
+| `serialPort`    | string                              | —                     | Serial device path                                    |
+| `httpAddress`   | string                              | `meshtastic.local`    | Device IP or hostname                                 |
+| `httpTls`       | boolean                             | `false`               | Use HTTPS for HTTP transport                          |
+| `mqtt.broker`   | string                              | `mqtt.meshtastic.org` | MQTT broker hostname                                  |
+| `mqtt.port`     | number                              | `1883`                | MQTT broker port                                      |
+| `mqtt.username` | string                              | `meshdev`             | MQTT username                                         |
+| `mqtt.password` | string                              | `large4cats`          | MQTT password                                         |
+| `mqtt.topic`    | string                              | `msh/US/2/json/#`     | MQTT subscribe topic                                  |
+| `mqtt.tls`      | boolean                             | `false`               | Use TLS for MQTT                                      |
+| `region`        | string                              | `UNSET`               | LoRa region (serial/HTTP only)                        |
+| `nodeName`      | string                              | —                     | Device display name and @mention trigger              |
+| `dmPolicy`      | `open` \| `pairing` \| `allowlist`  | `pairing`             | DM access policy                                      |
+| `allowFrom`     | string[]                            | —                     | Allowed node IDs (e.g. `["!aabbccdd"]`)               |
+| `groupPolicy`   | `open` \| `allowlist` \| `disabled` | `disabled`            | Group channel policy                                  |
+| `channels`      | object                              | —                     | Per-channel config (requireMention, tools, allowFrom) |
 
 ### Multi-account
 
@@ -168,3 +184,4 @@ US, EU_433, EU_868, CN, JP, ANZ, KR, TW, RU, IN, NZ_865, TH, UA_433, UA_868, MY_
 ## License
 
 MIT
+

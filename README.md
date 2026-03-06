@@ -1,50 +1,38 @@
-# OpenClaw Meshtastic Plugin
+# MeshClaw: OpenClaw Meshtastic Channel Plugin
+
+<p align="center">
+  <img src="media/GoMeshClaw.png" width="700" alt="Meshtastic LoRa hardware" />
+</p>
 
 [![npm version](https://img.shields.io/npm/v/@seeed-studio/meshtastic.svg)](https://www.npmjs.com/package/@seeed-studio/meshtastic)
 [![license](https://img.shields.io/npm/l/@seeed-studio/meshtastic.svg)](https://www.npmjs.com/package/@seeed-studio/meshtastic)
 
 **[English](README.md)** | [中文](README.zh-CN.md)
 
-[OpenClaw](https://github.com/openclaw/openclaw) channel plugin for [Meshtastic](https://meshtastic.org/) LoRa mesh networks. Connect your AI gateway to the mesh over USB serial, HTTP, or MQTT — no cloud required.
+**MeshClaw** is an OpenClaw channel plugin that lets your AI gateway send and receive messages over Meshtastic — no internet, no cell towers, just radio waves. Talk to your AI assistant from the mountains, the ocean, or anywhere the grid doesn't reach.
+
+⭐ Star us on GitHub — it motivates us a lot!
 
 > [!IMPORTANT]
 > This is a **channel plugin** for the [OpenClaw](https://github.com/openclaw/openclaw) AI gateway — not a standalone application. You need a running OpenClaw instance (Node.js 22+) to use it.
 
 [Documentation][docs] · [Hardware Guide](#recommended-hardware) · [Report Bug][issues] · [Request Feature][issues]
 
-<p align="center">
-  <img src="media/hardware.jpg" width="420" alt="Meshtastic LoRa hardware" />
-</p>
 
 ## Table of Contents
 
-- [Quick Start](#quick-start)
 - [How It Works](#how-it-works)
 - [Recommended Hardware](#recommended-hardware)
-- [Demo](#demo)
 - [Features](#features)
+- [Capabilities & Roadmap](#Capabilities & Roadmap)
+- [Demo](#demo)
+- [Quick Start](#quick-start)
 - [Setup Wizard](#setup-wizard)
 - [Configuration](#configuration)
 - [Troubleshooting](#troubleshooting)
 - [Development](#development)
 - [Contributing](#contributing)
 
-## Quick Start
-
-```bash
-# 1. Install plugin
-openclaw plugins install @seeed-studio/meshtastic
-
-# 2. Guided setup — walks you through transport, region, and access policy
-openclaw onboard
-
-# 3. Verify
-openclaw channels status --probe
-```
-
-<p align="center">
-  <img src="media/setup-screenshot.png" width="700" alt="OpenClaw setup wizard" />
-</p>
 
 ## How It Works
 
@@ -79,11 +67,33 @@ Inbound messages go through access control (DM policy, group policy, mention gat
 
 | Device | Best for | Link |
 |---|---|---|
-| XIAO ESP32S3 + Wio-SX1262 kit | Budget off-grid node | [Buy][hw-xiao] |
-| Wio Tracker L1 Pro | Ready-to-deploy gateway | [Buy][hw-wio] |
-| SenseCAP Card Tracker T1000-E | Compact field tracker | [Buy][hw-sensecap] |
+| XIAO ESP32S3 + Wio-SX1262 kit | Entry-level development | [Buy][hw-xiao] |
+| Wio Tracker L1 Pro | Portable field gateway | [Buy][hw-wio] |
+| SenseCAP Card Tracker T1000-E | Compact tracker | [Buy][hw-sensecap] |
 
-Any Meshtastic-compatible device works. Serial and HTTP transports connect directly; MQTT requires no local hardware at all.
+No hardware? MQTT transport connects via broker — no local device required.
+
+Any Meshtastic-compatible device works.
+
+## Features
+
+● **AI Agent Integration** — Bridges OpenClaw AI agents with Meshtastic LoRa mesh networks. Enables intelligent communication without cloud dependency.
+
+● **Three Transport Modes** — Serial (USB), HTTP (WiFi), and MQTT support
+
+● **DM & Group Channels with Access Control** — Supports both conversation modes with DM allowlists, channel response rules, and mention-gating 
+
+● **Multi-Account Support**— Run multiple independent connections simultaneously
+
+● **Resilient Mesh Communication** — Auto-reconnect with configurable retries. Handles connection drops gracefully.
+
+## Capabilities & Roadmap
+
+The plugin treats Meshtastic as a first-class channel — just like Telegram or Discord — enabling AI conversations and skill invocation entirely over LoRa radio, without internet dependency.
+
+| Query Information Offline                                    | Cross-Channel Bridge: Send from off-grid, receive anywhere | 🔜What's next:                                                |
+| ------------------------------------------------------------ | ---------------------------------------------------------- | ------------------------------------------------------------ |
+| <img src="media/image1.png" alt="Query Information Offline" /> | <img src="media/image2.png" alt="Cross-Channel Bridge" />  | We plan to ingest real-time node data (GPS location, environmental sensors, device status) into OpenClaw's context, enabling the AI to monitor mesh network health and broadcast proactive alerts without waiting for user queries. |
 
 ## Demo
 
@@ -91,13 +101,22 @@ https://github.com/user-attachments/assets/a3e46e9d-cf5a-4743-9830-f671a1998ca0
 
 Fallback: [media/demo.mp4](media/demo.mp4)
 
-## Features
+## Quick Start
 
-- **Direct messages and mesh channels** with per-channel rules
-- **Access control** — DM policy (`open` / `pairing` / `allowlist`), group policy (`open` / `allowlist` / `disabled`), mention-gating, per-channel allowlists
-- **Multi-account** — run independent serial, HTTP, and MQTT connections side by side
-- **Region-aware** — sets device region on connect and derives MQTT topic defaults
-- **Auto-reconnect** with resilient retry handling
+```bash
+# 1. Install plugin
+openclaw plugins install @seeed-studio/meshtastic
+
+# 2. Guided setup — walks you through transport, region, and access policy
+openclaw onboard
+
+# 3. Verify
+openclaw channels status --probe
+```
+
+<p align="center">
+  <img src="media/setup-screenshot.png" width="700" alt="OpenClaw setup wizard" />
+</p>
 
 ## Setup Wizard
 
@@ -168,7 +187,10 @@ Controls who can send **direct messages** to the bot:
 
 > Only appears when `dmPolicy` is `allowlist`, or when the wizard determines one is needed.
 
-A list of Meshtastic node IDs allowed to send direct messages. Format: `!aabbccdd` (hex node ID). Multiple entries are comma-separated.
+A list of Meshtastic User IDs allowed to send direct messages. Format: `!aabbccdd` (hex User ID). Multiple entries are comma-separated.
+<p align="center">
+  <img src="media/image3.jpg" width="400" />
+</p>
 
 ### 8. Account Display Names
 

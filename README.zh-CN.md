@@ -1,20 +1,22 @@
-# OpenClaw Meshtastic 插件
+# MeshClaw: OpenClaw Meshtastic Channel Plugin
+
+<p align="center">
+  <img src="media/GoMeshClaw.png" width="700" alt="Meshtastic LoRa hardware" />
+</p>
 
 [![npm version](https://img.shields.io/npm/v/@seeed-studio/meshtastic.svg)](https://www.npmjs.com/package/@seeed-studio/meshtastic)
 [![license](https://img.shields.io/npm/l/@seeed-studio/meshtastic.svg)](https://www.npmjs.com/package/@seeed-studio/meshtastic)
 
-[English](README.md) | **[中文](README.zh-CN.md)**
+**[English](README.md)** | [中文](README.zh-CN.md)
 
 [OpenClaw](https://github.com/openclaw/openclaw) 的 [Meshtastic](https://meshtastic.org/) LoRa 网状网络频道插件。通过 USB 串口、HTTP 或 MQTT 将 AI 网关连接到 mesh 网络，无需云服务。
 
 > [!IMPORTANT]
+> 注意：人手有限，中文文档可能略有滞后，请优先查看英文文档。
+>
 > 这是 [OpenClaw](https://github.com/openclaw/openclaw) AI 网关的**频道插件**，不是独立应用程序。你需要一个运行中的 OpenClaw 实例（Node.js 22+）才能使用。
 
 [文档][docs] · [硬件指南](#推荐硬件) · [报告问题][issues] · [功能请求][issues]
-
-<p align="center">
-  <img src="media/hardware.jpg" width="420" alt="Meshtastic LoRa 硬件" />
-</p>
 
 ## 目录
 
